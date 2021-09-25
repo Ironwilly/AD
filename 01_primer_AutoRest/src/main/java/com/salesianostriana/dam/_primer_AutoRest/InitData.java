@@ -23,9 +23,9 @@ public class InitData {
         repository.saveAll(
                 Arrays.asList(
 
-                        new Task("erferfef","ffrfrfrhk"),
-                        new Task("wfrwfwe","dfdfddsfdvvvewfwfwef"),
-                        new Task("r458rgrgege","wsfudfjsfjds")
+                        new Task("Prueba 1"," texto de la prueba 1"),
+                        new Task("Prueba 2","texto de la prueba 2"),
+                        new Task("Prueba 3","texto de la prueba 3")
 
                 )
         );

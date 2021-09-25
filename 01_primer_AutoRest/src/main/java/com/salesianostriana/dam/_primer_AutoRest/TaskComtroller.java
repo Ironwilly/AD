@@ -18,7 +18,7 @@ public class TaskComtroller {
     private final TaskRepository repository;
 
     @GetMapping("/")
-    public List<Task> findAll(){
+    public List<Task> findAll() {
 
         return repository.findAll();
 
@@ -34,17 +34,15 @@ public class TaskComtroller {
     }
 
     @GetMapping("/{id}")
-    public Task findOne(@PathVariable("id") Long id){
+    public Task findOne(@PathVariable("id") Long id) {
 
-            return repository.findById(id).orElse(null);
-
-
+        return repository.findById(id).orElse(null);
 
 
     }
 
     @PutMapping("/{id}")
-    public Task edit(@RequestBody Task task,@PathVariable Long id) {
+    public Task edit(@RequestBody Task task, @PathVariable Long id) {
 
         Task antigua = repository.findById(id).orElse(task);
         antigua.setText(task.getText());
@@ -55,13 +53,11 @@ public class TaskComtroller {
     }
 
     @DeleteMapping("/{id}")
-                public ResponseEntity<?> delete(@PathVariable("id") Long id){
-            repository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-
-
-
-
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
+
+}
 
