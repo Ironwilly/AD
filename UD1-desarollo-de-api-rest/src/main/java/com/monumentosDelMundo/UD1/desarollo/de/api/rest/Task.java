@@ -1,7 +1,6 @@
 package com.monumentosDelMundo.UD1.desarollo.de.api.rest;
 
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,18 +18,20 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
-    private Long codigoPais;
+    private String codigoPais;
     private String nombrePais;
     private String nombreCiudad;
-    private Long latitud;
-    private Long longitud;
+    private Double latitud;
+    private Double longitud;
     private String nombreMonu;
     private String descripcion;
     private String url;
 
-    public Task( Long codigoPais, String nombrePais, String nombreCiudad,
-                 Long latitud, Long longitud, String nombreMonu,
-                 String descripcion, String url) {
+
+    public Task(String codigoPais, String nombrePais, String nombreCiudad,
+                Double latitud, Double longitud, String nombreMonu,
+                String descripcion, String url) {
+
 
         this.codigoPais = codigoPais;
         this.nombrePais = nombrePais;
@@ -41,4 +42,7 @@ public class Task {
         this.descripcion = descripcion;
         this.url = url;
     }
+
+
+
 }

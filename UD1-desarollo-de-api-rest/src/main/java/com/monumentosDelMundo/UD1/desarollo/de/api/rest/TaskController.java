@@ -23,7 +23,7 @@ public class TaskController {
 
     @GetMapping("/monumento/{id}")
 
-    public Task findOne(@PathVariable("id") int id){
+    public Task findOne(@PathVariable("{id}") Long id){
 
         return repository.findById(id).orElse(null);
 
@@ -41,14 +41,16 @@ public class TaskController {
     public Task edit(@RequestBody Task task,@PathVariable Long id){
 
         Task antigua = repository.findById(id).orElse(task);
-        antigua.setId(task.getCodigoPais());
-        antigua.setId(task.getNombrePais());
-        antigua.setId(task.getNombreCiudad());
-        antigua.setId(task.getLatitud());
-        antigua.setId(task.getLongitud());
-        antigua.setId(task.getNombreMonu());
-        antigua.setId(task.getDescripcion());
-        antigua.setId(task.getUrl());
+        antigua.setCodigoPais(task.getCodigoPais());
+        antigua.setCodigoPais((task.getCodigoPais()));
+        antigua.setNombrePais(task.getNombrePais());
+        antigua.setNombreCiudad(task.getNombreCiudad());
+        antigua.setLatitud(task.getLatitud());
+        antigua.setLongitud(task.getLongitud());
+        antigua.setNombreMonu(task.getNombreMonu());
+        antigua.setUrl(task.getUrl());
+
+
 
 
         return repository.save(antigua);
@@ -56,9 +58,9 @@ public class TaskController {
 
     }
 
-    @DeleteMapping("/monumento/{id}")
+    @DeleteMapping("/monumento/id")
 
-        public ResponseEntity<?> delete(@PathVariable("id") int id){
+        public ResponseEntity<?> delete(@PathVariable("id") Long id){
 
             repository.deleteById(id);
             return ResponseEntity.noContent().build();
