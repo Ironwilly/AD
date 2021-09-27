@@ -8,6 +8,20 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/*
+Para este ejercicio, se pide implementar una API REST sobre Monumentos del mundo.
+De cada Monumento queremos saber los siguientes datos:
+Su ID (un número entero)
+El código de país (según el código ISO 3166-1 alfa 2).
+El nombre del país.
+El nombre de la ciudad.
+Su localización (latitud, longitud).
+El nombre del monumento
+Un descripción del mismo
+La URL de una foto.
+
+ */
+
 @Component
 @RequiredArgsConstructor
 public class InitData {

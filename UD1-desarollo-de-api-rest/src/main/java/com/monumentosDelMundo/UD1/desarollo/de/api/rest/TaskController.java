@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController   //transforma en controlador REST
 @RequestMapping ("/")
 @RequiredArgsConstructor
 public class TaskController {
@@ -23,7 +23,7 @@ public class TaskController {
 
     @GetMapping("/monumento/{id}")
 
-    public Task findOne(@PathVariable("{id}") Long id){
+    public Task findOne(@PathVariable("id") Long id){
 
         return repository.findById(id).orElse(null);
 
@@ -33,7 +33,8 @@ public class TaskController {
 
     public ResponseEntity<Task> create(@RequestBody Task task){
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(task));
+    return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(task)); //TAMBIEN SE PUEDE PONER EN VEZ DE HTTPSTATUS... EL NUMERO DE PETICION QUE SE QUIERA.... EJ: 201
+
     }
 
     @PutMapping("/monumento/{id}")
@@ -58,7 +59,7 @@ public class TaskController {
 
     }
 
-    @DeleteMapping("/monumento/id")
+    @DeleteMapping("/monumento/{id}")
 
         public ResponseEntity<?> delete(@PathVariable("id") Long id){
 
