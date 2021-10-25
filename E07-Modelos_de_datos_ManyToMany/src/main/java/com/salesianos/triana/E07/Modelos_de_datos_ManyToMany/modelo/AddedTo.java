@@ -3,23 +3,43 @@ package com.salesianos.triana.E07.Modelos_de_datos_ManyToMany.modelo;
 
 import lombok.*;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
 
 
-@Embeddable
-
+@Entity
 @AllArgsConstructor
 @Setter
 @Getter
 @NoArgsConstructor
+@Builder
 
 
-public class AddedTo {
+public class AddedTo implements Serializable {
 
-    private Long song_id;
 
-    private Long artist_id;
+    @Builder.Default
+    @EmbeddedId
+    private AddedToPk id = new AddedToPk();
+
+
+    @ManyToMany
+    @MapsId("songId")
+    @JoinColumn(name ="songId")
+    private Song song;
+
+    @ManyToMany
+    @MapsId("artistId")
+    @JoinColumn(name = "artistId")
+    private Playlist playlist;
+
+    private String datetime;
+
+    private String order;
+
+
+
 
 }

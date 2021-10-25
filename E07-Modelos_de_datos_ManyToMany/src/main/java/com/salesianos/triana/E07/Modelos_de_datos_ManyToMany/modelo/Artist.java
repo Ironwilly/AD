@@ -5,14 +5,16 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Artist implements Serializable {
 
 
@@ -21,12 +23,14 @@ public class Artist implements Serializable {
 
     private Long id;
 
-
+    @Column(name ="name")
     private String name;
 
-
-    @OneToMany (mappedBy = "artist")
-    private List<Song> songs;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    @OneToMany (mappedBy = "artist", fetch = FetchType.EAGER)
+    private List<Song> songs = new ArrayList<>();
 
     @ManyToOne
     private Artist artist;
