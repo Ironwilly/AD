@@ -25,12 +25,12 @@ public class AddedTo implements Serializable {
     private AddedToPk id = new AddedToPk();
 
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("songId")
     @JoinColumn(name ="songId")
     private Song song;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("artistId")
     @JoinColumn(name = "artistId")
     private Playlist playlist;

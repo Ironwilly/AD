@@ -35,6 +35,13 @@ public class Playlist implements Serializable {
 
     public void addSong(Song s) {
         this.getListSongs().add(s);
+
+        if(s.getPlaylists() == null){
+            s.setPlaylists(new ArrayList<>());
+            s.getPlaylists().add(this);
+
+        }
+
     }
 
     public void removeSong(Song s){

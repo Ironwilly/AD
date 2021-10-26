@@ -32,8 +32,6 @@ public class Artist implements Serializable {
     @OneToMany (mappedBy = "artist", fetch = FetchType.EAGER)
     private List<Song> songs = new ArrayList<>();
 
-    @ManyToOne
-    private Artist artist;
 
 
 

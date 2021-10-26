@@ -46,6 +46,7 @@ public class MainDePrueba {
 
         Playlist playlist = Playlist.builder()
                 .name("Grandes éxitos del thrash metal")
+                .description("En esta playlist encontramos música de la buena")
                 .build();
 
         playlistService.save(playlist);
@@ -53,7 +54,7 @@ public class MainDePrueba {
 
         playlistService.edit(playlist);
 
-        System.out.printf(playlist.getName(),playlist.getListSongs(),playlist.getDescription());
+        System.out.printf(playlist.getName(),song.getTitle(),artist.getName(),playlist.getDescription());
 
 
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -22,11 +22,11 @@ public class Song implements Serializable {
 
     private Long id;
 
-
+    @Column(name = "title")
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "artist", foreignKey = @ForeignKey(name = "FK_SONG_ARTIST"))
+    @JoinColumn(name = "artist_id", foreignKey = @ForeignKey(name = "FK_SONG_ARTIST"))
     private Artist artist;
 
     private  String album;
