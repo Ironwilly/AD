@@ -1,5 +1,6 @@
 package edu.salesianos.triana.RealStateV2.model;
 
+import edu.salesianos.triana.RealStateV2.users.model.Usuario;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
