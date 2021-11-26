@@ -1,4 +1,0 @@
-2021-11-25 11:54:02 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USUARIOS" no encontrada
-Table "USUARIOS" not found; SQL statement:
-insert into usuarios (apellidos, avatar, direccion, email, inmobiliaria_id, nombre, password, rol, telefono, id) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) [42102-200]
