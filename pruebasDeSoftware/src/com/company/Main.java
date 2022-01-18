@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
 
@@ -11,15 +12,15 @@ public class Main {
         // símbolo '<' seguido de '>', esto es "<>". Hay que tener en cuenta que cada vez que se extrae un
         // diamante podría formarse otro.
 
-
+        Stack pila = new Stack();
         System.out.println("¿Cuántos diamantes has extraído de la mina?");
         Scanner sc = new Scanner(System.in);
 
         String diamante = sc.nextLine();
 
-        int stringLenght = diamante.length();
 
-        int stringLengthWithoutSpaces = diamante.replace(" ", "").length();
+
+
 
         int total1 = 0;
         char temp1;
@@ -55,7 +56,10 @@ public class Main {
             result=(total1+total2)/2;
         }else {
 
-           result = (total1+total2)%2 ;
+           //result =((total1+total2)/2) - (total1+total2)%2 ;
+
+            System.out.print("estoy aquí");
+
 
         }
 
