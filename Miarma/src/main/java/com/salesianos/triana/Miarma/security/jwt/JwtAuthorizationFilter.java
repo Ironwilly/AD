@@ -1,12 +1,13 @@
 package com.salesianos.triana.Miarma.security.jwt;
 
 
+import com.salesianos.triana.Miarma.users.model.User;
 import com.salesianos.triana.Miarma.users.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -46,7 +47,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
                                     user,
-
+                                    user.getRol(),
                                     user.getAuthorities()
                             );
                     authentication.setDetails(new WebAuthenticationDetails(request));

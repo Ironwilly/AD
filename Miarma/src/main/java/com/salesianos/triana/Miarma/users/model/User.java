@@ -6,8 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,7 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @SuperBuilder
 @Data
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID", strategy = GenerationType.IDENTITY)
@@ -47,13 +53,41 @@ public class User {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Roles rol;
+
     private Boolean privado;
 
     private Boolean publico;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
+    }
 
+    @Override
+    public String getUsername() {
+        return null;
+    }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

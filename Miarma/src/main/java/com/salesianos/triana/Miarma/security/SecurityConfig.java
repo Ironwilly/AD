@@ -50,8 +50,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .authorizeRequests()
+                    .antMatchers(HttpMethod.POST,"/auth/login").hasAnyRole("USER")
+                    .and()
+                    .formLogin()
+                    .loginPage("/auth/login")
+                    .failureUrl("/auth/login?error=true")
+                    .permitAll()
+                    .and()
+                    .logout()
+                    .logoutSuccessUrl("/auth/login?logout=true")
+                    .invalidateHttpSession(true)
+                    .permitAll();
 
-                    .anyRequest().authenticated();
+
+
+
 
             http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
             http.headers().frameOptions().disable();

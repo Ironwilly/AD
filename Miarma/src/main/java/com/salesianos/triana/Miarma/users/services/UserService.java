@@ -5,6 +5,7 @@ import com.salesianos.triana.Miarma.services.base.BaseService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.dto.GetUserDto;
 import com.salesianos.triana.Miarma.users.dto.UserDtoConverter;
+import com.salesianos.triana.Miarma.users.model.Roles;
 import com.salesianos.triana.Miarma.users.model.User;
 import com.salesianos.triana.Miarma.users.repositorios.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -23,6 +26,24 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
     private final PasswordEncoder passwordEncoder;
     private final UserDtoConverter userDtoConverter;
+
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return this.repositorio.findFirstByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException(email + " no encontrado"));
+    }
+
+
+    public List<User> loadUserByRole(Roles rol) throws UsernameNotFoundException{
+        return this.repositorio.findByRol(rol);
+    }
+
+    public Optional<User> loadUserById(UUID id) throws UsernameNotFoundException{
+        return this.repositorio.findById(id);
+    }
+
+
 
 
     public User saveUser(CreateUserDto createUserDto) {
@@ -36,6 +57,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
                     .telefono(createUserDto.getTelefono())
                     .avatar(createUserDto.getAvatar())
                     .password(passwordEncoder.encode(createUserDto.getPassword()))
+                    .rol(Roles.USER)
                     .build();
 
             return save(user);
@@ -58,9 +80,6 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
-    }
+
 }
 
