@@ -3,6 +3,8 @@ package com.salesianos.triana.Miarma.users.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -13,6 +15,10 @@ public class CreateUserDto {
     private String nombre;
 
     private String apellidos;
+
+    private String nick;
+
+    private LocalDate fechNac;
 
     private String direccion;
 

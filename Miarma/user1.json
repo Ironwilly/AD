@@ -1,0 +1,11 @@
+{
+    "nombre" : "Willy" ,
+    "apellidos" : "ferrari ferrari",
+    "direccion" : "Calle del pez",
+    "email" : "estemismo@gmail.com",
+    "telefono" : "666555444",
+    "nick" : "ironwilly",
+    "avatar" : "http://localhost:8080/download/bart.png",
+    "password" : "12345678",
+    "password2" : "12345678"
+    }
