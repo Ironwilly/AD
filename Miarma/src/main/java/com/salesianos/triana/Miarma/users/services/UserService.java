@@ -1,6 +1,7 @@
 package com.salesianos.triana.Miarma.users.services;
 
 
+import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.services.base.BaseService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.dto.GetUserDto;
@@ -15,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
     private final PasswordEncoder passwordEncoder;
     private final UserDtoConverter userDtoConverter;
+    private final StorageService storageService;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -47,27 +52,35 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
 
 
-    public User saveUser(CreateUserDto createUserDto) {
 
-        if (createUserDto.getPassword().contentEquals(createUserDto.getPassword2())) {
-            User user = User.builder()
-                    .nombre(createUserDto.getNombre())
-                    .apellidos(createUserDto.getApellidos())
-                    .direccion(createUserDto.getDireccion())
-                    .email(createUserDto.getEmail())
-                    .telefono(createUserDto.getTelefono())
-                    .avatar(createUserDto.getAvatar())
-                    .password(passwordEncoder.encode(createUserDto.getPassword()))
-                    .rol(Roles.USER)
-                    .build();
+    public User saveUser(CreateUserDto createUserDto, MultipartFile file) {
 
-            return save(user);
-        } else {
-            return null;
-        }
+        String filename = storageService.store(file);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
+
+        return userRepository.save(User.builder()
+                .nombre(createUserDto.getNombre())
+                .apellidos(createUserDto.getApellidos())
+                .direccion(createUserDto.getDireccion())
+                .email(createUserDto.getEmail())
+                .telefono(createUserDto.getTelefono())
+                .avatar(uri)
+                .fechNaci(createUserDto.getFechNac())
+                .nick(createUserDto.getNick())
+                .isPrivado(Boolean.valueOf(createUserDto.getIsPrivado()))
+                .password(passwordEncoder.encode(createUserDto.getPassword()))
+                .rol(Roles.USER)
+                .build());
 
 
     }
+
+
+
 
 
 

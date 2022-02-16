@@ -24,6 +24,8 @@ public class CreateUserDto {
 
     private String email;
 
+    private String isPrivado;
+
     private String telefono;
 
     private String avatar;

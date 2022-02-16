@@ -50,6 +50,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .authorizeRequests()
+                    .antMatchers(HttpMethod.POST,"/upload").anonymous()
+                    .antMatchers(HttpMethod.GET,"/me").hasRole("USER")
                     .antMatchers(HttpMethod.POST,"/auth/registrer").anonymous()
                     .antMatchers(HttpMethod.POST,"/auth/login").anonymous()
                     .anyRequest().authenticated();

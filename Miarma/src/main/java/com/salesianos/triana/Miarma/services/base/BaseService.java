@@ -1,6 +1,8 @@
 package com.salesianos.triana.Miarma.services.base;
 
 
+import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
+import com.salesianos.triana.Miarma.users.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -37,4 +39,6 @@ public abstract class BaseService<T,ID,R extends JpaRepository<T,ID>> {
     public void deleteById(ID id) {
         repositorio.deleteById(id);
     }
+
+
 }

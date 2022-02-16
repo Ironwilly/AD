@@ -1,7 +1,9 @@
 package com.salesianos.triana.Miarma.users.model;
 
 
+import com.salesianos.triana.Miarma.models.Publicacion;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -63,7 +66,13 @@ public class User implements UserDetails {
 
     private Boolean isPrivado;
 
-    private Boolean isPublico;
+
+    @Builder.Default
+    @OneToMany(mappedBy="user")
+    private List<Publicacion> publicaciones = new ArrayList<>();
+
+
+
 
 
     @Override
@@ -73,26 +82,26 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

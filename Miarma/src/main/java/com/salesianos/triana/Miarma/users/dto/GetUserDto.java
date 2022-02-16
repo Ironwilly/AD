@@ -27,6 +27,8 @@ public class GetUserDto {
 
     private String nick;
 
+    private Boolean isPrivado;
+
 
 
 }

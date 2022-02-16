@@ -52,13 +52,12 @@ public class FileSystemStorageService implements StorageService {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         String newFilename = "";
         try {
-            // Si el fichero está vacío, excepción al canto
+
             if (file.isEmpty())
                 throw new StorageException("El fichero subido está vacío");
 
             newFilename = filename;
             while(Files.exists(rootLocation.resolve(newFilename))) {
-                // Tratamos de generar uno nuevo
                 String extension = StringUtils.getFilenameExtension(newFilename);
                 String name = newFilename.replace("."+extension,"");
 

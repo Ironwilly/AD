@@ -17,28 +17,12 @@ public class UserDtoConverter {
                 .avatar(user.getAvatar())
                 .fechNac(user.getFechNaci())
                 .nick(user.getNick())
+                .isPrivado(user.getIsPrivado())
 
                 .build();
     }
 
 
-
-
-
-    public CreateUserDto userToCreateUser(User user){
-
-
-        return CreateUserDto.builder()
-                .nombre(user.getNombre())
-                .apellidos(user.getApellidos())
-                .direccion(user.getDireccion())
-                .telefono(user.getTelefono())
-                .email(user.getEmail())
-                .avatar(user.getAvatar())
-                .password(user.getPassword())
-                .password2(user.getPassword())
-                .build();
-    }
 
 
 }
