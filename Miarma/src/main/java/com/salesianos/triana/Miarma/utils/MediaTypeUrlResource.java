@@ -1,10 +1,11 @@
+
+
 package com.salesianos.triana.Miarma.utils;
 
 
 import com.salesianos.triana.Miarma.exception.StorageException;
 import org.apache.tika.Tika;
 import org.springframework.core.io.UrlResource;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -41,3 +42,5 @@ public class MediaTypeUrlResource extends UrlResource {
         }
     }
 }
+
+

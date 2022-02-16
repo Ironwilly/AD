@@ -9,6 +9,7 @@ import com.salesianos.triana.Miarma.users.model.Roles;
 import com.salesianos.triana.Miarma.users.model.User;
 import com.salesianos.triana.Miarma.users.repositorios.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

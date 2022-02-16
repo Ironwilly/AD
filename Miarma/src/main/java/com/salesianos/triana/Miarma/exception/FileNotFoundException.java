@@ -1,3 +1,6 @@
+
+
+
 package com.salesianos.triana.Miarma.exception;
 
 
@@ -11,3 +14,4 @@ public class FileNotFoundException extends StorageException {
         super(message, cause);
     }
 }
+

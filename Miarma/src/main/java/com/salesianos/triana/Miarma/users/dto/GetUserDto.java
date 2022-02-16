@@ -3,6 +3,7 @@ package com.salesianos.triana.Miarma.users.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class GetUserDto {
     private String email;
 
     private String avatar;
+
+    private LocalDate fechNac;
+
+    private String nick;
 
 
 

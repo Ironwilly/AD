@@ -1,6 +1,8 @@
+
 package com.salesianos.triana.Miarma.controller;
 import com.salesianos.triana.Miarma.dto.FileResponse;
 import com.salesianos.triana.Miarma.services.StorageService;
+import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.utils.MediaTypeUrlResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -39,6 +44,14 @@ public class FileController {
 
         return ResponseEntity.created(URI.create(uri)).body(response);
 
+    }
+
+    @PostMapping("/upload2")
+    @ResponseBody
+    public List<ResponseEntity<?>> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+        return Arrays.stream(files)
+                .map(file -> upload(file))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/download/{filename:.+}")

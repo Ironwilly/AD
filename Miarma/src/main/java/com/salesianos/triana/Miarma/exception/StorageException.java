@@ -1,3 +1,7 @@
+
+
+
+
 package com.salesianos.triana.Miarma.exception;
 
 
@@ -12,3 +16,5 @@ public class StorageException extends RuntimeException {
         super(message);
     }
 }
+
+

@@ -1,3 +1,5 @@
+
+
 package com.salesianos.triana.Miarma.config;
 
 
@@ -13,3 +15,4 @@ public class StorageProperties {
 
     private String location;
 }
+

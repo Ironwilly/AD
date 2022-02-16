@@ -53,6 +53,8 @@ public class AuthenticationController {
                 .nombre(user.getNombre())
                 .apellidos(user.getApellidos())
                 .email(user.getEmail())
+                .nick(user.getNick())
+                .fechNac(user.getFechNaci())
                 .avatar(user.getAvatar())
                 .token(jwt)
                 .build();

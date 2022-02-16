@@ -1,3 +1,5 @@
+
+
 package com.salesianos.triana.Miarma.dto;
 
 
@@ -17,3 +19,5 @@ public class FileResponse {
     private String type;
     private long size;
 }
+
+
