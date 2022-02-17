@@ -5,6 +5,8 @@ package com.salesianos.triana.Miarma.services;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
@@ -24,6 +26,9 @@ public interface StorageService {
     void deleteFile(String filename);
 
     void deleteAll();
+
+    boolean resizeImage(File sourceFile);
+
 }
 
 
