@@ -9,5 +9,5 @@ import java.util.List;
 public interface PublicacionRepository extends JpaRepository<Publicacion,Long> {
 
 
-    List<Publicacion> findAll (Publicacion publicacion);
+    //List<Publicacion> findAll (Publicacion publicacion);
 }

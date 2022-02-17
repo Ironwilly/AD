@@ -37,6 +37,7 @@ public class PublicacionController {
                     content = @Content),
     })
 
+
     @PostMapping("/post")
     public ResponseEntity<?> create(@RequestPart("publicacion") CreatePublicacionDto newPublicacion, @RequestPart("file") MultipartFile file, User user) {
 
@@ -58,15 +59,18 @@ public class PublicacionController {
         return ResponseEntity.ok().body(publicacionService.edit(id, createPublicacionDto,file,createUserDto));
 
 
+
     }
+
+
 /*
     @DeleteMapping("/post/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         publicacionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+*/
 
- */
 
 
 }

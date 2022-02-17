@@ -27,16 +27,12 @@ public class PublicacionServiceImpl implements PublicacionService {
 
     private final StorageService storageService;
     private final PublicacionRepository publicacionRepository;
-    private final UserRepository userRepository;
-    private final CreateUserDto createUserDto;
 
 
-    public PublicacionServiceImpl(PublicacionDtoConverter publicacionDtoConverter, StorageService storageService, PublicacionRepository publicacionRepository, UserRepository userRepository, CreateUserDto createUserDto) {
+    public PublicacionServiceImpl(StorageService storageService, PublicacionRepository publicacionRepository) {
 
         this.storageService = storageService;
         this.publicacionRepository = publicacionRepository;
-        this.userRepository = userRepository;
-        this.createUserDto = createUserDto;
     }
 
     @Override
@@ -71,7 +67,10 @@ public class PublicacionServiceImpl implements PublicacionService {
 
     }
 
+    @Override
+    public void deleteFile(String filename) {
 
+    }
 
 
     @Override

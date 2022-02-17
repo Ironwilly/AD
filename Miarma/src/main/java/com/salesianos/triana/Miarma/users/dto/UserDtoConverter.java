@@ -13,11 +13,14 @@ public class UserDtoConverter {
 
     public GetUserDto userToGetUserDto(User user){
 
+        /*
         List<String> tituloPublicacion = new ArrayList<>();
         for (int i=0; i<user.getPublicaciones().size();i++){
             tituloPublicacion.add(user.getPublicaciones().get(i).getTitulo());
         }
 
+
+         */
         return GetUserDto.builder()
                 .id(user.getId())
                 .nombre(user.getNombre())

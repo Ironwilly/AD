@@ -15,10 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -51,6 +48,7 @@ public class User implements UserDetails {
 
     private String direccion;
 
+    @Column(unique = true)
     private String email;
 
     private String telefono;
@@ -68,10 +66,8 @@ public class User implements UserDetails {
 
 
     @Builder.Default
-    @OneToMany(mappedBy="user")
-    private List<Publicacion> publicaciones = new ArrayList<>();
-
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Publicacion> publicaciones = new HashSet<Publicacion>();
 
 
 

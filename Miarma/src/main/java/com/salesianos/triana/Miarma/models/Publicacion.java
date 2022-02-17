@@ -29,7 +29,7 @@ public class Publicacion {
 
 
     @ManyToOne
-    @JoinColumn(name = "user", foreignKey = @ForeignKey(name = "FK_PUBLICACION_USER"))
+    @JoinColumn(name = "user")
     private User user;
 
     public Publicacion(String titulo, String descripcion, String imagen, Boolean isPublic) {
@@ -50,5 +50,7 @@ public class Publicacion {
         u.getPublicaciones().remove(this);
         this.user = null;
     }
+
+
 
 }
