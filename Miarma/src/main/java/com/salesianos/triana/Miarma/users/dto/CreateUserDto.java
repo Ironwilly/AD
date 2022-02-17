@@ -38,4 +38,6 @@ public class CreateUserDto {
 
 
     private List<Publicacion> publicaciones;
+
+
 }

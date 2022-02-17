@@ -1,10 +1,16 @@
 package com.salesianos.triana.Miarma.services.base;
 
 
+import com.salesianos.triana.Miarma.errors.exceptions.SingleEntityNotFoundException;
+import com.salesianos.triana.Miarma.services.StorageService;
+import com.salesianos.triana.Miarma.services.impl.FileSystemStorageService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
+import com.salesianos.triana.Miarma.users.repositorios.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -15,8 +21,10 @@ public abstract class BaseService<T,ID,R extends JpaRepository<T,ID>> {
 
 
 
+
     @Autowired
     protected R repositorio;
+
 
     public List<T> findAll() {
         return repositorio.findAll();
@@ -30,9 +38,15 @@ public abstract class BaseService<T,ID,R extends JpaRepository<T,ID>> {
         return repositorio.save(t);
     }
 
+
     public T edit(T t) {
+
         return save(t);
     }
+
+
+
+
 
     public void delete(T t) {
         repositorio.delete(t);

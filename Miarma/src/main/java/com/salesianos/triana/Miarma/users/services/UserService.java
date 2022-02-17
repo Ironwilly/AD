@@ -102,7 +102,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
             u.setAvatar(uri);
             userRepository.save(u);
             return userDtoConverter.editUser(u);
-        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(),User.class));
+        }).orElseThrow(() -> new SingleEntityNotFoundException(id,User.class));
 
     }
 

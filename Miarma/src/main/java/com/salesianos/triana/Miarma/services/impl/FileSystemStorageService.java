@@ -15,6 +15,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -57,12 +58,12 @@ public class FileSystemStorageService implements StorageService {
                 throw new StorageException("El fichero subido está vacío");
 
             newFilename = filename;
-            while(Files.exists(rootLocation.resolve(newFilename))) {
+            while (Files.exists(rootLocation.resolve(newFilename))) {
                 String extension = StringUtils.getFilenameExtension(newFilename);
-                String name = newFilename.replace("."+extension,"");
+                String name = newFilename.replace("." + extension, "");
 
                 String suffix = Long.toString(System.currentTimeMillis());
-                suffix = suffix.substring(suffix.length()-6);
+                suffix = suffix.substring(suffix.length() - 6);
 
                 newFilename = name + "_" + suffix + "." + extension;
 
@@ -72,7 +73,6 @@ public class FileSystemStorageService implements StorageService {
                 Files.copy(inputStream, rootLocation.resolve(newFilename),
                         StandardCopyOption.REPLACE_EXISTING);
             }
-
 
 
         } catch (IOException ex) {
@@ -89,8 +89,7 @@ public class FileSystemStorageService implements StorageService {
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new StorageException("Error al leer los ficheros almacenados", e);
         }
     }
@@ -108,29 +107,50 @@ public class FileSystemStorageService implements StorageService {
             MediaTypeUrlResource resource = new MediaTypeUrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
-            }
-            else {
+            } else {
                 throw new FileNotFoundException(
                         "Could not read file: " + filename);
             }
-        }
-        catch (MalformedURLException e) {
+        } catch (MalformedURLException e) {
             throw new FileNotFoundException("Could not read file: " + filename, e);
         }
     }
 
+
     @Override
     public void deleteFile(String filename) {
 
+        File delFile = new File(filename);
+
+
+        try {
+            Path file = load(filename);
+            MediaTypeUrlResource resource = new MediaTypeUrlResource(file.toUri());
+            if (delFile.isFile() && delFile.exists()) {
+
+                delFile.delete();
+
+
+
+            } else {
+                throw new FileNotFoundException(
+                        "Could not read file: " + filename);
+
+            }
+
+
+        } catch (MalformedURLException e) {
+            throw new FileNotFoundException("Could not read file: " + filename, e);
+        }
+    }
+        @Override
+        public void deleteAll () {
+            FileSystemUtils.deleteRecursively(rootLocation.toFile());
+        }
+
+
     }
 
-    @Override
-    public void deleteAll() {
-        FileSystemUtils.deleteRecursively(rootLocation.toFile());
-    }
-
-
-}
 
 
 

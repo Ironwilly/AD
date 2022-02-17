@@ -58,12 +58,14 @@ public class UserController {
 
     }
 
+    /*
     @PutMapping("/profile/me")
-    public ResponseEntity<CreateUserDto> edit(@RequestPart("user") CreateUserDto editUser, @PathVariable UUID id,@RequestPart("file") MultipartFile file) {
-
-
-        return ResponseEntity.ok().body(userService.edit(editUser,id,file));
+    public ResponseEntity<CreateUserDto> edit(@RequestPart("user") CreateUserDto editUser, @PathVariable UUID id,@RequestPart("file") MultipartFile file){
+        userService.edit(editUser,id,file);
+        return ResponseEntity.ok().body(editUser);
     }
+
+     */
 
 
 }

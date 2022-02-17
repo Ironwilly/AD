@@ -4,7 +4,7 @@ package com.salesianos.triana.Miarma.controller;
 import com.salesianos.triana.Miarma.dto.CreatePublicacionDto;
 import com.salesianos.triana.Miarma.dto.PublicacionDtoConverter;
 import com.salesianos.triana.Miarma.models.Publicacion;
-import com.salesianos.triana.Miarma.services.PublicacionService;
+import com.salesianos.triana.Miarma.services.impl.PublicacionServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
@@ -18,14 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
-import java.util.UUID;
-
 @RestController
 @RequiredArgsConstructor
 public class PublicacionController {
 
-    private final PublicacionService publicacionService;
+    private final PublicacionServiceImpl publicacionService;
     private final UserService userService;
     private final StorageService storageService;
     private final PublicacionDtoConverter publicacionDtoConverter;
@@ -41,9 +38,9 @@ public class PublicacionController {
     })
 
     @PostMapping("/post")
-    public ResponseEntity<?> create(@RequestPart("publicacion") CreatePublicacionDto newPublicacion, @RequestPart("file") MultipartFile file) {
+    public ResponseEntity<?> create(@RequestPart("publicacion") CreatePublicacionDto newPublicacion, @RequestPart("file") MultipartFile file, User user) {
 
-        Publicacion publicacionSaved = publicacionService.savePublicacion(newPublicacion,file);
+        Publicacion publicacionSaved = publicacionService.savePublicacion(newPublicacion,file,user);
 
 
 
@@ -57,17 +54,19 @@ public class PublicacionController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<CreatePublicacionDto> edit(@RequestPart("publicacion") CreatePublicacionDto createPublicacionDto, @PathVariable Long id,@RequestPart("file") MultipartFile file) {
-        return ResponseEntity.ok().body(publicacionService.edit(createPublicacionDto, id,file));
+    public ResponseEntity<Publicacion> edit(@PathVariable Long id,@RequestPart("publicacion") CreatePublicacionDto createPublicacionDto,@RequestPart("file") MultipartFile file, CreateUserDto createUserDto) {
+        return ResponseEntity.ok().body(publicacionService.edit(id, createPublicacionDto,file,createUserDto));
 
 
     }
-
+/*
     @DeleteMapping("/post/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         publicacionService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+ */
 
 
 }
