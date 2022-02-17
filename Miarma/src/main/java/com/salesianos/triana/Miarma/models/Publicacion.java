@@ -18,7 +18,7 @@ public class Publicacion {
     @GeneratedValue
     private Long id;
 
-    private String nombre;
+    private String titulo;
 
     @Lob
     private String descripcion;
@@ -31,6 +31,14 @@ public class Publicacion {
     @ManyToOne
     @JoinColumn(name = "user", foreignKey = @ForeignKey(name = "FK_PUBLICACION_USER"))
     private User user;
+
+    public Publicacion(String titulo, String descripcion, String imagen, Boolean isPublic) {
+
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.imagen = imagen;
+        this.isPublic = isPublic;
+    }
 
     public void addUser (User u){
 

@@ -1,6 +1,8 @@
 package com.salesianos.triana.Miarma.users.services;
 
 
+import com.salesianos.triana.Miarma.Repositorios.PublicacionRepository;
+import com.salesianos.triana.Miarma.errors.exceptions.SingleEntityNotFoundException;
 import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.services.base.BaseService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
@@ -32,11 +34,12 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
     private final UserDtoConverter userDtoConverter;
     private final StorageService storageService;
     private final UserRepository userRepository;
+    private final PublicacionRepository publicacionRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return this.repositorio.findFirstByEmail(email)
+        return this.repositorio.findByEmail(email)
                 .orElseThrow(()-> new UsernameNotFoundException(email + " no encontrado"));
     }
 
@@ -79,11 +82,29 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
     }
 
+    public CreateUserDto editUser (CreateUserDto createUserDto, UUID id,MultipartFile file){
 
+        String filename = storageService.store(file);
 
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
 
+        return  userRepository.findById(id).map(u -> {
+            u.setNombre(createUserDto.getNombre());
+            u.setApellidos(createUserDto.getApellidos());
+            u.setNick(createUserDto.getNick());
+            u.setFechNaci(createUserDto.getFechNac());
+            u.setDireccion(createUserDto.getDireccion());
+            u.setEmail(createUserDto.getEmail());
+            u.setIsPrivado(Boolean.valueOf(createUserDto.getIsPrivado()));
+            u.setAvatar(uri);
+            userRepository.save(u);
+            return userDtoConverter.editUser(u);
+        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(),User.class));
 
-
+    }
 
     public List<GetUserDto> listUserToListGetUserDto(List<User> users) {
         List<GetUserDto> getUserDtos = new ArrayList<>();

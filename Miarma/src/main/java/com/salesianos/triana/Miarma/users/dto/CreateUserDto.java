@@ -1,9 +1,11 @@
 package com.salesianos.triana.Miarma.users.dto;
 
 
+import com.salesianos.triana.Miarma.models.Publicacion;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,4 +35,7 @@ public class CreateUserDto {
     private String password;
 
     private String password2;
+
+
+    private List<Publicacion> publicaciones;
 }
