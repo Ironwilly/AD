@@ -60,6 +60,7 @@ public class PublicacionServiceImpl implements PublicacionService {
                         .descripcion(createPublicacionDto.getDescripcion())
                         .imagen(uri)
                         .isPublic(createPublicacionDto.getIsPublic())
+                        .user(user)
                         .build());
 
 

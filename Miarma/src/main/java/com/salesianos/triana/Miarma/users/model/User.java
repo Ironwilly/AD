@@ -66,7 +66,7 @@ public class User implements UserDetails {
 
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Publicacion> publicaciones = new HashSet<Publicacion>();
 
 
