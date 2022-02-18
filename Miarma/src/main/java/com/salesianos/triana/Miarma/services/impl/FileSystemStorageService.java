@@ -15,6 +15,8 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
+import org.imgscalr.Scalr;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,10 +63,8 @@ public class FileSystemStorageService implements StorageService {
             while (Files.exists(rootLocation.resolve(newFilename))) {
                 String extension = StringUtils.getFilenameExtension(newFilename);
                 String name = newFilename.replace("." + extension, "");
-
                 String suffix = Long.toString(System.currentTimeMillis());
                 suffix = suffix.substring(suffix.length() - 6);
-
                 newFilename = name + "_" + suffix + "." + extension;
 
             }
@@ -122,22 +122,16 @@ public class FileSystemStorageService implements StorageService {
 
         File delFile = new File(filename);
 
-
         try {
             Path file = load(filename);
             MediaTypeUrlResource resource = new MediaTypeUrlResource(file.toUri());
             if (delFile.isFile() && delFile.exists()) {
-
                 delFile.delete();
-
-
-
             } else {
                 throw new FileNotFoundException(
                         "Could not read file: " + filename);
 
             }
-
 
         } catch (MalformedURLException e) {
             throw new FileNotFoundException("Could not read file: " + filename, e);
@@ -148,7 +142,13 @@ public class FileSystemStorageService implements StorageService {
             FileSystemUtils.deleteRecursively(rootLocation.toFile());
         }
 
+    @Override
+    public boolean resizeImage(File sourceFile) {
+        return true;
+    }
 
+    @Override
+        public BufferedImage simpleResizer(BufferedImage bufferedImage, int width){return Scalr.resize(bufferedImage, 1024);    }
 
 
     }

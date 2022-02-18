@@ -1,7 +1,7 @@
 package com.salesianos.triana.Miarma.dto;
 
 import com.salesianos.triana.Miarma.models.Publicacion;
-import com.salesianos.triana.Miarma.users.dto.GetUserDto;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +14,6 @@ public class PublicacionDtoConverter {
                 c.getDescripcion(),
                 c.getImagen(),
                 c.getIsPublic()
-
 
 
         );
@@ -31,6 +30,8 @@ public class PublicacionDtoConverter {
                 .imagen(publi.getImagen())
                 .isPublic(publi.getIsPublic())
                 .userNick(publi.getUser().getNick())
+
+
                 .build();
     }
 
