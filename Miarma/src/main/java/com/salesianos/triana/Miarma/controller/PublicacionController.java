@@ -3,7 +3,6 @@ package com.salesianos.triana.Miarma.controller;
 
 import com.salesianos.triana.Miarma.Repositorios.PublicacionRepository;
 import com.salesianos.triana.Miarma.dto.CreatePublicacionDto;
-import com.salesianos.triana.Miarma.dto.FileResponse;
 import com.salesianos.triana.Miarma.models.Publicacion;
 import com.salesianos.triana.Miarma.services.impl.PublicacionServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;
@@ -22,11 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.imageio.ImageIO;
-import javax.validation.Valid;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URI;
 import java.nio.file.Files;
 
 @RestController
@@ -49,47 +46,6 @@ public class PublicacionController {
                     content = @Content),
     })
 
-/*
-    @PostMapping("/post")
-    public Publicacion create(@RequestPart("publicacion")CreatePublicacionDto createPublicacionDto,@RequestPart("file")MultipartFile file,User user) throws IOException {
-
-
-        String name = storageService.store(file);
-        String extension = StringUtils.getFilenameExtension(name);
-        BufferedImage originalImage = ImageIO.read(file.getInputStream());
-        BufferedImage escaledImage = storageService.simpleResizer(originalImage, 1024);
-        OutputStream outputStream = Files.newOutputStream(storageService.load(name));
-        ImageIO.write(escaledImage,extension,outputStream);
-
-        String name2 = storageService.store(file);
-        String extension2 = StringUtils.getFilenameExtension(name);
-        BufferedImage originalImage2 = ImageIO.read(file.getInputStream());
-        OutputStream outputStream2 = Files.newOutputStream(storageService.load(name2));
-        ImageIO.write(originalImage2,extension2,outputStream2);
-
-
-        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(name)
-                .toUriString();
-
-        Publicacion publicacion10 = Publicacion.builder()
-                .titulo(createPublicacionDto.getTitulo())
-                .descripcion(createPublicacionDto.getDescripcion())
-                .imagen(uri)
-                .user(user)
-                .build();
-
-
-
-
-        userRepository.save(user);
-
-        return publicacionRepository.save(publicacion10);
-    }
-
-
- */
 
     @PostMapping("/post")
     public ResponseEntity<Publicacion> create(@RequestPart("publicacion")CreatePublicacionDto createPublicacionDto,@RequestPart("file")MultipartFile file,User user) throws IOException {
@@ -128,13 +84,7 @@ public class PublicacionController {
     }
 
 
-/*
-    @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        publicacionService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-*/
+
 
 
 
