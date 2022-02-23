@@ -74,6 +74,7 @@ public class PublicacionServiceImpl implements PublicacionService {
                         .imagen(uri)
                         .user(user)
                         .isPublic(createPublicacionDto.getIsPublic())
+                        .user(user)
                         .build());
 
 

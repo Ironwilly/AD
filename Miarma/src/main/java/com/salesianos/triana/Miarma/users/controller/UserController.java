@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-;
+;import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,7 +38,7 @@ public class UserController {
     })
 
     @PostMapping("/auth/registrer")
-    public ResponseEntity<?> create(@RequestPart("user") CreateUserDto newUser,@RequestPart("file") MultipartFile file) {
+    public ResponseEntity<?> create(@RequestPart("user") CreateUserDto newUser,@RequestPart("file") MultipartFile file) throws IOException {
 
         User userSaved = userService.saveUser(newUser,file);
 

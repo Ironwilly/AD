@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +49,7 @@ public class PublicacionController {
 
 
     @PostMapping("/post")
-    public ResponseEntity<Publicacion> create(@RequestPart("publicacion")CreatePublicacionDto createPublicacionDto,@RequestPart("file")MultipartFile file,User user) throws IOException {
+    public ResponseEntity<Publicacion> create(@RequestPart("publicacion")CreatePublicacionDto createPublicacionDto,@RequestPart("file")MultipartFile file,@AuthenticationPrincipal User user) throws IOException {
 
         String name = storageService.store(file);
         String extension = StringUtils.getFilenameExtension(name);

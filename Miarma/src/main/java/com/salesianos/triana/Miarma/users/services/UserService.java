@@ -18,9 +18,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,13 +62,20 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
 
 
-    public User saveUser(CreateUserDto createUserDto, MultipartFile file) {
+    public User saveUser(CreateUserDto createUserDto, MultipartFile file) throws IOException {
 
-        String filename = storageService.store(file);
+        String name = storageService.store(file);
+
+
+        String extension = StringUtils.getFilenameExtension(name);
+        BufferedImage originalImage = ImageIO.read(file.getInputStream());
+        BufferedImage escaledImage = storageService.simpleResizer(originalImage, 128);
+        OutputStream outputStream = Files.newOutputStream(storageService.load(name));
+        ImageIO.write(escaledImage,extension,outputStream);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
-                .path(filename)
+                .path(name)
                 .toUriString();
 
         return userRepository.save(User.builder()
