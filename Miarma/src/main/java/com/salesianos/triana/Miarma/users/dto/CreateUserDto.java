@@ -26,7 +26,7 @@ public class CreateUserDto {
 
     private String email;
 
-    private String isPrivado;
+    private String isPublic;
 
     private String telefono;
 

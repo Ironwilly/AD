@@ -6,7 +6,7 @@
     "telefono" : "666555444",
     "nick" : "ironwilly",
     "fechNac" : "2020-01-01",
-    "isPrivado" : false,
+    "isPublic" : true,
     "password" : "12345678",
     "password2" : "12345678"
     }

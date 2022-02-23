@@ -62,11 +62,11 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Roles rol;
 
-    private Boolean isPrivado;
+    private Boolean isPublic;
 
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Publicacion> publicaciones = new HashSet<Publicacion>();
 
 

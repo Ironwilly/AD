@@ -83,6 +83,11 @@ public class PublicacionController {
 
     }
 
+    @GetMapping("/post/public")
+    public ResponseEntity<?> listado(){
+        return ResponseEntity.ok(publicacionRepository.findAllPublicPublicaciones());
+    }
+
 
 
 

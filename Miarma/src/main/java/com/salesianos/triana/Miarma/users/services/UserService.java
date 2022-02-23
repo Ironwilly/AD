@@ -74,7 +74,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
                 .avatar(uri)
                 .fechNaci(createUserDto.getFechNac())
                 .nick(createUserDto.getNick())
-                .isPrivado(Boolean.valueOf(createUserDto.getIsPrivado()))
+                .isPublic(Boolean.valueOf(createUserDto.getIsPublic()))
                 .password(passwordEncoder.encode(createUserDto.getPassword()))
                 .rol(Roles.USER)
                 .build());
@@ -98,7 +98,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
             u.setFechNaci(createUserDto.getFechNac());
             u.setDireccion(createUserDto.getDireccion());
             u.setEmail(createUserDto.getEmail());
-            u.setIsPrivado(Boolean.valueOf(createUserDto.getIsPrivado()));
+            u.setIsPublic(Boolean.valueOf(createUserDto.getIsPublic()));
             u.setAvatar(uri);
             userRepository.save(u);
             return userDtoConverter.editUser(u);

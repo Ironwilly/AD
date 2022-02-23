@@ -20,7 +20,7 @@ public class UserDtoConverter {
                 .avatar(user.getAvatar())
                 .fechNac(user.getFechNaci())
                 .nick(user.getNick())
-                .isPrivado(user.getIsPrivado())
+                .isPublic(user.getIsPublic())
                 .build();
     }
 

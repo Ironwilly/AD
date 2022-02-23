@@ -2,22 +2,22 @@ package com.salesianos.triana.Miarma.services.impl;
 
 import com.salesianos.triana.Miarma.Repositorios.PublicacionRepository;
 import com.salesianos.triana.Miarma.dto.CreatePublicacionDto;
+import com.salesianos.triana.Miarma.dto.GetPublicacionDto;
 import com.salesianos.triana.Miarma.dto.PublicacionDtoConverter;
 import com.salesianos.triana.Miarma.errors.exceptions.EntityNotFoundException;
+import com.salesianos.triana.Miarma.errors.exceptions.ListEntityNotFoundException;
 import com.salesianos.triana.Miarma.models.Publicacion;
 import com.salesianos.triana.Miarma.services.PublicacionService;
 import com.salesianos.triana.Miarma.services.StorageService;
-import com.salesianos.triana.Miarma.services.base.BaseService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
-import com.salesianos.triana.Miarma.users.repositorios.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PublicacionServiceImpl implements PublicacionService {
@@ -27,17 +27,30 @@ public class PublicacionServiceImpl implements PublicacionService {
 
     private final StorageService storageService;
     private final PublicacionRepository publicacionRepository;
+    private final PublicacionDtoConverter publicacionDtoConverter;
 
 
-    public PublicacionServiceImpl(StorageService storageService, PublicacionRepository publicacionRepository) {
+    public PublicacionServiceImpl(StorageService storageService, PublicacionRepository publicacionRepository, PublicacionDtoConverter publicacionDtoConverter) {
 
         this.storageService = storageService;
         this.publicacionRepository = publicacionRepository;
+        this.publicacionDtoConverter = publicacionDtoConverter;
     }
 
     @Override
-    public List<Publicacion> listarPublicaciones(){
-        return publicacionRepository.findAll();
+    public List<GetPublicacionDto> findAllPublicPublicaciones(){
+
+        List<Publicacion> publicacionList = publicacionRepository.findAllPublicPublicaciones();
+
+        if (publicacionList.isEmpty()){
+            throw new ListEntityNotFoundException(Publicacion.class);
+        }else {
+            List<GetPublicacionDto> result = publicacionList.stream()
+                    .map(publicacionDtoConverter::getPublicacionToPublicacionDto)
+                    .collect(Collectors.toList());
+            return result;
+        }
+
     }
 
     @Override
@@ -59,6 +72,7 @@ public class PublicacionServiceImpl implements PublicacionService {
                         .titulo(createPublicacionDto.getTitulo())
                         .descripcion(createPublicacionDto.getDescripcion())
                         .imagen(uri)
+                        .user(user)
                         .isPublic(createPublicacionDto.getIsPublic())
                         .build());
 

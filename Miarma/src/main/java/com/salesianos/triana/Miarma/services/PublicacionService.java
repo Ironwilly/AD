@@ -3,6 +3,7 @@ package com.salesianos.triana.Miarma.services;
 
 import com.salesianos.triana.Miarma.dto.CreatePublicacionDto;
 
+import com.salesianos.triana.Miarma.dto.GetPublicacionDto;
 import com.salesianos.triana.Miarma.models.Publicacion;
 
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 public interface PublicacionService {
 
-    List<Publicacion> listarPublicaciones();
+    List<GetPublicacionDto> findAllPublicPublicaciones();
     Optional<Publicacion> findOne(Long id);
     Publicacion savePublicacion(CreatePublicacionDto createPublicacionDto, MultipartFile file, User user);
     public void deleteFile(String filename);
