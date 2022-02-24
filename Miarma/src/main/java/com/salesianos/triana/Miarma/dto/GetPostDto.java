@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetPublicacionDto {
+public class GetPostDto {
 
     private UUID id;
 

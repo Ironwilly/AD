@@ -1,7 +1,7 @@
 package com.salesianos.triana.Miarma.users.services;
 
 
-import com.salesianos.triana.Miarma.Repositorios.PublicacionRepository;
+import com.salesianos.triana.Miarma.Repositorios.PostRepository;
 import com.salesianos.triana.Miarma.errors.exceptions.SingleEntityNotFoundException;
 import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.services.base.BaseService;
@@ -40,7 +40,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
     private final UserDtoConverter userDtoConverter;
     private final StorageService storageService;
     private final UserRepository userRepository;
-    private final PublicacionRepository publicacionRepository;
+    private final PostRepository postRepository;
 
 
     @Override

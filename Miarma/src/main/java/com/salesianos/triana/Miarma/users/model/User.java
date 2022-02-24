@@ -1,7 +1,7 @@
 package com.salesianos.triana.Miarma.users.model;
 
 
-import com.salesianos.triana.Miarma.models.Publicacion;
+import com.salesianos.triana.Miarma.models.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -67,7 +67,7 @@ public class User implements UserDetails {
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<Publicacion> publicaciones = new HashSet<Publicacion>();
+    private Set<Post> posts = new HashSet<Post>();
 
 
 

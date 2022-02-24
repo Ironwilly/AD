@@ -1,6 +1,5 @@
 package com.salesianos.triana.Miarma.errors.exceptions;
 
-import com.salesianos.triana.Miarma.models.Publicacion;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

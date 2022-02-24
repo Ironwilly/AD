@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CreatePublicacionDto {
+public class CreatePostDto {
 
 
     private String titulo;

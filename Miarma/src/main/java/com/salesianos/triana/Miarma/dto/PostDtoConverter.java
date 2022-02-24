@@ -1,15 +1,15 @@
 package com.salesianos.triana.Miarma.dto;
 
-import com.salesianos.triana.Miarma.models.Publicacion;
+import com.salesianos.triana.Miarma.models.Post;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class PublicacionDtoConverter {
+public class PostDtoConverter {
 
-    public Publicacion createPublicacionDto(CreatePublicacionDto c){
+    public Post createPostDto(CreatePostDto c){
 
-        return new Publicacion(
+        return new Post(
                 c.getTitulo(),
                 c.getDescripcion(),
                 c.getImagen(),
@@ -21,9 +21,9 @@ public class PublicacionDtoConverter {
 
     }
 
-    public GetPublicacionDto getPublicacionToPublicacionDto(Publicacion publi){
+    public GetPostDto getPostToPostDto(Post publi){
 
-        return  GetPublicacionDto.builder()
+        return  GetPostDto.builder()
 
                 .titulo(publi.getTitulo())
                 .descripcion(publi.getDescripcion())

@@ -1,10 +1,10 @@
 package com.salesianos.triana.Miarma.controller;
 
 
-import com.salesianos.triana.Miarma.Repositorios.PublicacionRepository;
-import com.salesianos.triana.Miarma.dto.CreatePublicacionDto;
-import com.salesianos.triana.Miarma.models.Publicacion;
-import com.salesianos.triana.Miarma.services.impl.PublicacionServiceImpl;
+import com.salesianos.triana.Miarma.Repositorios.PostRepository;
+import com.salesianos.triana.Miarma.dto.CreatePostDto;
+import com.salesianos.triana.Miarma.models.Post;
+import com.salesianos.triana.Miarma.services.impl.PostServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
@@ -29,10 +29,10 @@ import java.nio.file.Files;
 
 @RestController
 @RequiredArgsConstructor
-public class PublicacionController {
+public class PostController {
 
-    private final PublicacionServiceImpl publicacionService;
-    private final PublicacionRepository publicacionRepository;
+    private final PostServiceImpl postService;
+    private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final StorageService storageService;
 
@@ -41,7 +41,7 @@ public class PublicacionController {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la publicación",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Publicacion.class))}),
+                            schema = @Schema(implementation = Post.class))}),
             @ApiResponse(responseCode = "400",
                     description = "No se ha creado la publicación",
                     content = @Content),
@@ -49,7 +49,7 @@ public class PublicacionController {
 
 
     @PostMapping("/post")
-    public ResponseEntity<Publicacion> create(@RequestPart("publicacion")CreatePublicacionDto createPublicacionDto,@RequestPart("file")MultipartFile file,@AuthenticationPrincipal User user) throws IOException {
+    public ResponseEntity<Post> create(@RequestPart("post") CreatePostDto createPostDto, @RequestPart("file")MultipartFile file, @AuthenticationPrincipal User user) throws IOException {
 
         String name = storageService.store(file);
         String extension = StringUtils.getFilenameExtension(name);
@@ -65,20 +65,20 @@ public class PublicacionController {
                 .path(name)
                 .toUriString();
 
-        Publicacion publicacion10 = Publicacion.builder()
-                .titulo(createPublicacionDto.getTitulo())
-                .descripcion(createPublicacionDto.getDescripcion())
+        Post post10 = Post.builder()
+                .titulo(createPostDto.getTitulo())
+                .descripcion(createPostDto.getDescripcion())
                 .imagen(uri)
                 .user(user)
                 .build();
 
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(publicacionService.savePublicacion(createPublicacionDto,file,user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.savePost(createPostDto,file,user));
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Publicacion> edit(@PathVariable Long id,@RequestPart("publicacion") CreatePublicacionDto createPublicacionDto,@RequestPart("file") MultipartFile file, CreateUserDto createUserDto) {
-        return ResponseEntity.ok().body(publicacionService.edit(id, createPublicacionDto,file,createUserDto));
+    public ResponseEntity<Post> edit(@PathVariable Long id, @RequestPart("post") CreatePostDto createPostDto, @RequestPart("file") MultipartFile file, CreateUserDto createUserDto) {
+        return ResponseEntity.ok().body(postService.edit(id, createPostDto,file,createUserDto));
 
 
 
@@ -86,7 +86,7 @@ public class PublicacionController {
 
     @GetMapping("/post/public")
     public ResponseEntity<?> listado(){
-        return ResponseEntity.ok(publicacionRepository.findAllPublicPublicaciones());
+        return ResponseEntity.ok(postService.findAllPublicPosts());
     }
 
 

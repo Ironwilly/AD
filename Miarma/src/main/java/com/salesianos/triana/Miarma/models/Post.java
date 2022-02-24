@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Publicacion {
+public class Post {
 
     @Id
     @GeneratedValue
@@ -32,7 +32,7 @@ public class Publicacion {
     @JoinColumn(name = "user")
     private User user;
 
-    public Publicacion(String titulo, String descripcion, String imagen, Boolean isPublic) {
+    public Post(String titulo, String descripcion, String imagen, Boolean isPublic) {
 
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -43,11 +43,11 @@ public class Publicacion {
     public void addUser (User u){
 
         this.user = u;
-        u.getPublicaciones().add(this);
+        u.getPosts().add(this);
     }
 
     public void removeUser(User u) {
-        u.getPublicaciones().remove(this);
+        u.getPosts().remove(this);
         this.user = null;
     }
 
