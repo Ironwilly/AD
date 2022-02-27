@@ -1,6 +1,7 @@
 package com.salesianos.triana.Miarma.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianos.triana.Miarma.users.model.User;
 import lombok.*;
 
@@ -29,7 +30,7 @@ public class Post {
 
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JsonIgnore
     private User user;
 
     public Post(String titulo, String descripcion, String imagen, Boolean isPublic) {

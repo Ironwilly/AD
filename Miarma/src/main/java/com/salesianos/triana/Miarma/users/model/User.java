@@ -10,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,9 @@ import java.util.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "user")
 @SuperBuilder
+@Builder
 @Data
 public class User implements UserDetails {
 
@@ -37,7 +40,7 @@ public class User implements UserDetails {
             }
     )
 
-    @Column(name = "id", updatable = false, nullable = false)
+
     private UUID id;
 
     private String nombre;
@@ -48,7 +51,8 @@ public class User implements UserDetails {
 
     private String direccion;
 
-    @Column(unique = true)
+    @NaturalId
+    @Column(unique = true,updatable = false)
     private String email;
 
     private String telefono;

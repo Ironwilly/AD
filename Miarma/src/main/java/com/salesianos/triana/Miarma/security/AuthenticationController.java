@@ -50,10 +50,7 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<?> misDatos(@AuthenticationPrincipal User user){
-        return ResponseEntity.ok(convertUserToJwtUserResponse(user, null));
-    }
+
 
     private JwtUsuarioResponse convertUserToJwtUserResponse(User user, String jwt) {
         return JwtUsuarioResponse.builder()
@@ -65,6 +62,13 @@ public class AuthenticationController {
                 .avatar(user.getAvatar())
                 .token(jwt)
                 .build();
+    }
+
+
+
+    @GetMapping("/me")
+    public ResponseEntity<?> misDatos(@AuthenticationPrincipal User user){
+        return ResponseEntity.ok(convertUserToJwtUserResponse(user, null));
     }
 
 

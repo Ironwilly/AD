@@ -65,12 +65,7 @@ public class JwtProvider {
 
     }
 
-    public UUID getUserIdFromJwt(String token) {
 
-        return UUID.fromString(parser.parseClaimsJws(token).getBody().getSubject());
-
-
-    }
 
     public boolean validateToken(String token) {
 
@@ -81,6 +76,13 @@ public class JwtProvider {
             log.info("Error con el token: " + ex.getMessage());
         }
         return false;
+
+    }
+
+    public UUID getUserIdFromJwt(String token) {
+
+        return UUID.fromString(parser.parseClaimsJws(token).getBody().getSubject());
+
 
     }
 
