@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 public class GetPostDto {
 
-    private UUID id;
+    private Long id;
 
     private String titulo;
 

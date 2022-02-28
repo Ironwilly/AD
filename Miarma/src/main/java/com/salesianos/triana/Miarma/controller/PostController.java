@@ -3,6 +3,7 @@ package com.salesianos.triana.Miarma.controller;
 
 import com.salesianos.triana.Miarma.Repositorios.PostRepository;
 import com.salesianos.triana.Miarma.dto.CreatePostDto;
+import com.salesianos.triana.Miarma.dto.GetPostDto;
 import com.salesianos.triana.Miarma.models.Post;
 import com.salesianos.triana.Miarma.services.impl.PostServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;

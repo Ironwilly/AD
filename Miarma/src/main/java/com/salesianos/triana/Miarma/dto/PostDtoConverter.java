@@ -25,6 +25,7 @@ public class PostDtoConverter {
 
         return  GetPostDto.builder()
 
+                .id(publi.getId())
                 .titulo(publi.getTitulo())
                 .descripcion(publi.getDescripcion())
                 .imagen(publi.getImagen())

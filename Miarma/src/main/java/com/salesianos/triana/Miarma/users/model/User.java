@@ -71,7 +71,7 @@ public class User implements UserDetails {
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Set<Post> posts = new HashSet<Post>();
+    private Set<Post> posts = new HashSet<>();
 
 
 
@@ -82,7 +82,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return nombre;
     }
 
     @Override
