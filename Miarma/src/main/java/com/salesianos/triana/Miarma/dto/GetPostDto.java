@@ -26,4 +26,6 @@ public class GetPostDto {
 
     private String userNick;
 
+    private String avatar;
+
 }

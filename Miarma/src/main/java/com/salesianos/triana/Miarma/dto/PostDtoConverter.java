@@ -31,6 +31,7 @@ public class PostDtoConverter {
                 .imagen(publi.getImagen())
                 .isPublic(publi.getIsPublic())
                 .userNick(publi.getUser().getNick())
+                .avatar(publi.getUser().getAvatar())
 
 
                 .build();
