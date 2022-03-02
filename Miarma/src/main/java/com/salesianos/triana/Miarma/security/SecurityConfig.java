@@ -55,6 +55,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .antMatchers(HttpMethod.POST,"/auth/registrer").anonymous()
                     .antMatchers(HttpMethod.POST,"/auth/login").anonymous()
                     .antMatchers(HttpMethod.GET, "/download/**").anonymous()
+                    .antMatchers(HttpMethod.GET, "/post/public").authenticated()
+                    .antMatchers(HttpMethod.DELETE, "/post/{id}").authenticated()
                     .antMatchers("/h2-console/**").permitAll()
                     .anyRequest().authenticated();
 

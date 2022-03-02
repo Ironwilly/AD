@@ -11,12 +11,17 @@ import com.salesianos.triana.Miarma.services.PostService;
 import com.salesianos.triana.Miarma.services.StorageService;
 import com.salesianos.triana.Miarma.users.dto.CreateUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
+import io.jsonwebtoken.io.IOException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -91,12 +96,6 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public void deleteFile(String filename) {
-
-    }
-
-
-    @Override
     public Post edit(Long id, CreatePostDto createPostDto, MultipartFile file, CreateUserDto createUserDto){
 
 
@@ -136,5 +135,28 @@ public class PostServiceImpl implements PostService {
 
 
 
+    @Override
+    public void removePostById(Long id) throws IOException {
 
-}
+       Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()) {
+
+            storageService.deleteFile(post.get().getImagen());
+            postRepository.delete(post.get());
+        }
+
+
+
+
+
+
+
+
+        }
+
+
+
+    }
+
+
+//}

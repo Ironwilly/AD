@@ -1,5 +1,7 @@
 package com.salesianos.triana.Miarma.errors.exceptions;
 
+import com.salesianos.triana.Miarma.models.Post;
+
 import java.util.UUID;
 
 public class SingleEntityNotFoundException extends EntityNotFoundException{
@@ -13,4 +15,6 @@ public class SingleEntityNotFoundException extends EntityNotFoundException{
     public SingleEntityNotFoundException(Long id, Class clazz) {
         super(String.format("No se puede encontrar una entidad del tipo %s con ID: %s", clazz.getName(), id));
     }
+
+
 }
