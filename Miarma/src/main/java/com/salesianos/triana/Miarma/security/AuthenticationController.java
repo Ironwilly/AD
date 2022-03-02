@@ -4,6 +4,7 @@ package com.salesianos.triana.Miarma.security;
 import com.salesianos.triana.Miarma.security.dto.JwtUsuarioResponse;
 import com.salesianos.triana.Miarma.security.dto.LoginDto;
 import com.salesianos.triana.Miarma.security.jwt.JwtProvider;
+import com.salesianos.triana.Miarma.users.dto.GetUserDto;
 import com.salesianos.triana.Miarma.users.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,11 +68,26 @@ public class AuthenticationController {
                 .build();
     }
 
+    private GetUserDto convertUserToGetUserDto(User user,String jwt){
+        return GetUserDto.builder()
+
+                .id(user.getId())
+                .nombre(user.getNombre())
+                .email(user.getEmail())
+                .avatar(user.getAvatar())
+                .fechNac(user.getFechNaci())
+                .nick(user.getNick())
+                .isPublic(user.getIsPublic())
+                .build();
+
+
+    }
+
 
 
     @GetMapping("/me")
     public ResponseEntity<?> misDatos(@AuthenticationPrincipal User user){
-        return ResponseEntity.ok(convertUserToJwtUserResponse(user, null));
+        return ResponseEntity.ok(convertUserToGetUserDto(user, null));
     }
 
 

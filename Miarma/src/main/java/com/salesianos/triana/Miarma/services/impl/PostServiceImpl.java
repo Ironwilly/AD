@@ -136,7 +136,7 @@ public class PostServiceImpl implements PostService {
 
 
 
-    public void removePostById(Long id) throws IOException {
+    public void removePostById(Long id,User user) throws IOException {
 
        Optional<Post> post = postRepository.findById(id);
 

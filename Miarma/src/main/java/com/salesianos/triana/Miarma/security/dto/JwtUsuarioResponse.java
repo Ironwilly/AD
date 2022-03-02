@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Builder
 public class JwtUsuarioResponse {
 
+
     private String email;
 
     private String nick;

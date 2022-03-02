@@ -67,7 +67,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjMGE4MzgwMS03ZjAzLTE4MWYtODE3Zi0wM2E4NzBiMDAwMDAiLCJpYXQiOjE2NDUxMjAyNjksIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.5g7N_HskiWF3e6jkUTL90wcaK4BflEmKD5SCsJN777OLsYRdhF5nWTN9Wib-ckFm",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjNiLTEwMmItODE3Zi0zYjgxYjkzMjAwMDAiLCJpYXQiOjE2NDYwNTcyNDEsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ._CjZM7DBmxUxZsYiCEMP179za5U38h_soB12OTj0nYL9X3JX239ORsjX7YSvd6iS",
 									"type": "string"
 								}
 							]
@@ -97,14 +97,14 @@
 							"mode": "formdata",
 							"formdata": [
 								{
-									"key": "file",
-									"type": "file",
-									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/download/bart.png"
-								},
-								{
 									"key": "user",
 									"type": "file",
-									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/user1.json"
+									"src": "/D:/2 DAM/AD/Miarma/user1.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/2 DAM/AD/Miarma/download/bart.png"
 								}
 							]
 						},
@@ -148,7 +148,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjMGE4MzgwMS03ZjBhLTExYjctODE3Zi0wYTYzMDRiZDAwMDAiLCJpYXQiOjE2NDUyMzMxNDMsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.ABYyH48Qp5G-Y4gMeqLjfZlTh9dIpbLqevkfifAxmgl7ndBFOvuQXF-xaVybKmW_",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjNiLTFkNzEtODE3Zi0zYjhmZDBlZjAwMDAiLCJpYXQiOjE2NDYwNTgxNTksIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.R9Jg2of7ELiCclNm2jrlHjhSC9iIg0W_kOhSsP4CIS7IsAv2-_NRR8oyrUS7gyQL",
 									"type": "string"
 								}
 							]
@@ -164,7 +164,7 @@
 									"src": "/D:/2 DAM/AD/Miarma/download/powell.jpg"
 								},
 								{
-									"key": "publicacion",
+									"key": "post",
 									"type": "file",
 									"src": "/D:/2 DAM/AD/Miarma/publicacion1.json"
 								}
@@ -214,6 +214,84 @@
 							"path": [
 								"post",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todas publicaciones publicas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzFiMDJhZC03ZjQ0LTEzNTMtODE3Zi00NDU0NzVjNzAwMDAiLCJpYXQiOjE2NDYyMDUyNjksIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.pvO2FoE1hbgPSyOasa2tnRxlnq40sG21Xear3lzkS3bcc2e2IceENClWh3JT-DQp",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/D:/2 DAM/AD/Miarma/download/4.jpg"
+								},
+								{
+									"key": "publicacion",
+									"type": "file",
+									"src": "/D:/2 DAM/AD/Miarma/publicacion2.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/post/public",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"public"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar publicacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjQ3LTE4NDktODE3Zi00N2Y4OTVkYTAwMDAiLCJpYXQiOjE2NDYyNjYzNTIsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.Y1PvlPli5eKhJy-ermYucfyw1PkpcHhjsDgdpScwVKmHagAfgSungZ77Xbteonzj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"1"
 							]
 						}
 					},
