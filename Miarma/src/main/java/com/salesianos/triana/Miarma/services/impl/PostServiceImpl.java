@@ -135,15 +135,14 @@ public class PostServiceImpl implements PostService {
 
 
 
-    @Override
+
     public void removePostById(Long id) throws IOException {
 
        Optional<Post> post = postRepository.findById(id);
-        if (post.isPresent()) {
+
 
             storageService.deleteFile(post.get().getImagen());
             postRepository.delete(post.get());
-        }
 
 
 
