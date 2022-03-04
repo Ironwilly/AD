@@ -28,7 +28,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -61,19 +61,26 @@
 				},
 				{
 					"name": "me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjNiLTEwMmItODE3Zi0zYjgxYjkzMjAwMDAiLCJpYXQiOjE2NDYwNTcyNDEsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ._CjZM7DBmxUxZsYiCEMP179za5U38h_soB12OTj0nYL9X3JX239ORsjX7YSvd6iS",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:8080/me",
 							"protocol": "http",
@@ -148,7 +155,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjNiLTFkNzEtODE3Zi0zYjhmZDBlZjAwMDAiLCJpYXQiOjE2NDYwNTgxNTksIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.R9Jg2of7ELiCclNm2jrlHjhSC9iIg0W_kOhSsP4CIS7IsAv2-_NRR8oyrUS7gyQL",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -161,12 +168,12 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/D:/2 DAM/AD/Miarma/download/powell.jpg"
+									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/download/4.jpg"
 								},
 								{
 									"key": "post",
 									"type": "file",
-									"src": "/D:/2 DAM/AD/Miarma/publicacion1.json"
+									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/publicacion2.json"
 								}
 							]
 						},
@@ -221,6 +228,18 @@
 				},
 				{
 					"name": "Obtener todas publicaciones publicas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\",jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -230,7 +249,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzFiMDJhZC03ZjQ0LTEzNTMtODE3Zi00NDU0NzVjNzAwMDAiLCJpYXQiOjE2NDYyMDUyNjksIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.pvO2FoE1hbgPSyOasa2tnRxlnq40sG21Xear3lzkS3bcc2e2IceENClWh3JT-DQp",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -292,6 +311,35 @@
 							"path": [
 								"post",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publicas y No publicas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzFiMDJhZC03ZjU0LTFmMWYtODE3Zi01NDBmNzQ2MTAwMDAiLCJpYXQiOjE2NDY0NjkxODIsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.eY21onWFO1PN2-7KV2Nb26l55qni_c9yerCxzQIgsttm-soYs1T0MikBYsqs1jIL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"all"
 							]
 						}
 					},
