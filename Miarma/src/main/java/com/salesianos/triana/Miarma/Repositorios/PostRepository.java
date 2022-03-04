@@ -18,4 +18,13 @@ public interface PostRepository extends JpaRepository<Post,Long> {
             """, nativeQuery = true)
     List<Post> findAllPublicPosts ();
 
+
+    @Query (value = """
+            SELECT * FROM Post
+            """, nativeQuery = true)
+    List<Post> findAll ();
+
+
+
+
 }

@@ -58,7 +58,20 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public List<GetPostDto> findAll() {
 
+        List<Post> postList = postRepository.findAllPublicPosts();
+
+        if (postList.isEmpty()){
+            throw new ListEntityNotFoundException(Post.class);
+        }else {
+            List<GetPostDto> result = postList.stream()
+                    .map(postDtoConverter::getPostToPostDto)
+                    .collect(Collectors.toList());
+            return result;
+        }
+    }
 
 
     @Override

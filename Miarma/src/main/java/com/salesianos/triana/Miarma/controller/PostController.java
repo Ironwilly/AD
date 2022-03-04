@@ -90,6 +90,11 @@ public class PostController {
         return ResponseEntity.ok(postService.findAllPublicPosts());
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<?> listadoCompleto(){
+        return ResponseEntity.ok(postService.findAll());
+    }
+
 
     @DeleteMapping("/post/{id}")
     public ResponseEntity<?> removePost(@PathVariable Long id,@AuthenticationPrincipal User user)throws  IOException {

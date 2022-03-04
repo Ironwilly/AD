@@ -2,6 +2,7 @@ package com.salesianos.triana.Miarma.dto;
 
 
 import com.salesianos.triana.Miarma.users.dto.GetUserDto;
+import com.salesianos.triana.Miarma.users.model.User;
 import lombok.*;
 
 
@@ -24,8 +25,8 @@ public class GetPostDto {
 
     private Boolean isPublic;
 
-    private String userNick;
+    private User user;
 
-    private String avatar;
+
 
 }

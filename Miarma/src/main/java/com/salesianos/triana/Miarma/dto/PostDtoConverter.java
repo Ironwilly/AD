@@ -30,10 +30,7 @@ public class PostDtoConverter {
                 .descripcion(publi.getDescripcion())
                 .imagen(publi.getImagen())
                 .isPublic(publi.getIsPublic())
-                .userNick(publi.getUser().getNick())
-                .avatar(publi.getUser().getAvatar())
-
-
+                .user(publi.getUser())
                 .build();
     }
 
