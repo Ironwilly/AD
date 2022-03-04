@@ -30,7 +30,6 @@ public class Post {
 
 
     @ManyToOne
-    @JsonIgnore
     private User user;
 
     public Post(String titulo, String descripcion, String imagen, Boolean isPublic) {

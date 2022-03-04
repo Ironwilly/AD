@@ -1,6 +1,7 @@
 package com.salesianos.triana.Miarma.users.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianos.triana.Miarma.models.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -70,6 +71,7 @@ public class User implements UserDetails {
 
 
     @Builder.Default
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Post> posts = new HashSet<>();
 
