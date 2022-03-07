@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+* {
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    background: #ecf0f3;
+  }
+  h1 {
+    margin: 0;
+    padding: 0;
+    
+  }
+  .custom-form {
+    min-width: 300px;
+    max-width: 60%;
+   
+    background: rgba(247, 187, 187, 0.15);
+    padding: 2rem 3rem;
+    margin: auto;
+    border-radius: 2.5rem;
+    background-color: hsl(0, 0%, 84%);
+    box-shadow: 13px 13px 20px #c4c4c4, -13px -13px 20px #c4c4c4;
+    color: black;
+    margin-top: 10rem;
+   
+  }
+  .custom-form input {
+    display: block;
+    margin: 2rem 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
+        rgba(0, 0, 0, 0.1);
+    border: 0 none;
+    background: #ebf5fc;
+  
+   
+  }
+  .custom-form button {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: none;
+    font-size: 1rem;
+    color: #000000;
+    font-weight: bold;
+    background-color: #bcd8c1;
+    width: 100%;
+    display: block;
+    padding: 0.875rem 1rem;
+    border-radius: 1.5rem;
+    box-shadow: 3px 3px 8px #818080, -3px -3px 8px #818080;
+    cursor: pointer;
+
+    
+   
+    
+  }
+
+
