@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@CrossOrigin(origins= "*")
+
 public class LoginDto {
 
     private String email;

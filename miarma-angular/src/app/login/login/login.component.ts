@@ -1,5 +1,9 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthLoginDto } from 'src/app/models/dto/auth.dto';
+import { PostResponse } from 'src/app/models/interfaces/post.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,18 +12,24 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email: string | undefined;
-  password: string | undefined;
+  
+  email?: string ;
+  password?: string ;
+  token?: string  ;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, public router: Router,) { }
   loginDto = new AuthLoginDto();
 
   ngOnInit(): void {
   }
 
   login(){
+    
     this.authService.login(this.loginDto).subscribe(loginResult => {
-      alert(`Te has logueado y tu token es ${loginResult.token}`)
+      this.token=loginResult.token;
+      
+      this.router.navigateByUrl('http://localhost:8080/auth/login');
+      alert('Login successful');
     
   });
 

@@ -1,17 +1,19 @@
 
 <div class="login">
     <form class="custom-form" method="post">
-      <h1>Login</h1>
+      <p>Miarmaapp</p>
+      <div class="titulo">Login</div>
       <input
+      
         type="email"
-        [(ngModel)]="email"
+        [(ngModel)]="loginDto.email"
         name="email"
         placeholder="Email"
         required="required"
       />
       <input
         type="password"
-        [(ngModel)]="password"
+        [(ngModel)]="loginDto.password"
         name="password"
         placeholder="Password"
         required="required"

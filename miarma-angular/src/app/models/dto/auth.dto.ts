@@ -7,3 +7,5 @@ export class AuthLoginDto {
         this.password = '';
     }
 }
+
+

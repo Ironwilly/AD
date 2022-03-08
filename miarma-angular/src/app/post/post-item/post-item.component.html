@@ -1,0 +1,11 @@
+<mat-card class="post-card">
+    <mat-card-content>
+        <div class="post-image">
+            <img [src]="getPostImageUrl(postInput)" height="200px" width="100%" />
+        </div>
+        <h3 class="movie-title">{{postInput.titulo}}</h3>
+        <p class="movie-overview">{{postInput.descripcion}}</p>
+        
+    </mat-card-content>
+  
+</mat-card>

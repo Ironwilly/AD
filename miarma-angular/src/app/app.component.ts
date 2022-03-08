@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'miarma-angular';
 
   constructor(private http: HttpClient) {
-    http.get('/auth/login"').subscribe();
+    http.get('/auth/login').subscribe();
   }
 
 }
