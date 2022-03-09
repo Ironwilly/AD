@@ -1,0 +1,48 @@
+.post-card {
+    display: inline-block;
+    min-height: 300px;
+    width: 300px;
+    margin-bottom: 10px;
+    
+}
+
+
+
+.post-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    display: inline-block; 
+    font-weight: bold;
+    margin: 0;
+}
+
+.post-description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    display: inline-block; 
+}
+
+.post-image {
+    width: 500px;
+    overflow: hidden;
+    height: 300px;
+    border-radius: 10px;
+}
+
+.post-image:hover {
+    cursor: pointer;
+}
+
+.post-image img {
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.post-image:hover img {
+    transform: scale(1.3); 
+    transition: transform .5s ease;
+}

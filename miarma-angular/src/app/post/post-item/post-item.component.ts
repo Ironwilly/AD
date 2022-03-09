@@ -23,7 +23,7 @@ export class PostItemComponent implements OnInit {
   }
 
   getPostImageUrl(post: PostResponse) {
-    return `${environment.apiBaseUrl}/${post.imagen}`;
+    return `${post.imagen}`;
   }
 
 }
