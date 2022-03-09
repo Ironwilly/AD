@@ -9,8 +9,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'miarma-angular';
 
-  constructor(private http: HttpClient) {
-    http.get('/auth/login').subscribe();
-  }
+
 
 }

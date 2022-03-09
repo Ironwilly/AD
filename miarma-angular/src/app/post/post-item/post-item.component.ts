@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PostResponse } from 'src/app/models/interfaces/post.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { PostService } from 'src/app/services/post.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,8 +14,8 @@ import { environment } from 'src/environments/environment';
 export class PostItemComponent implements OnInit {
   @Input() postInput!: PostResponse;
 
-  constructor(private authService: AuthService,
-    private dialog: MatDialog
+  constructor(private postService: PostService,
+
 
   ) { }
 
@@ -22,7 +23,7 @@ export class PostItemComponent implements OnInit {
   }
 
   getPostImageUrl(post: PostResponse) {
-    return `${environment.apiBaseUrl}${post.imagen}`;
+    return `${environment.apiBaseUrl}/${post.imagen}`;
   }
 
 }

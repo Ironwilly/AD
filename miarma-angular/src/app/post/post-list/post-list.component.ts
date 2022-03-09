@@ -9,17 +9,19 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
-  postList: PostResponse[] = [];
+  postList!: PostResponse[];
 
-  constructor(private postService: PostService,private authService: AuthService) { }
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.postService.getPost().subscribe(postResponse =>{
+    this.postService.getPost().subscribe(results =>{
 
-      this.postList = postResponse;})  // esta linea esta bien, hay que mirar el porqué falla
+      this.postList = results;
+
+    })
     }
 
-    
+
   }
 
 

@@ -12,25 +12,27 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
+  loginDto = new AuthLoginDto();
+
   email?: string ;
   password?: string ;
   token?: string  ;
 
-  constructor(private authService: AuthService, public router: Router,) { }
-  loginDto = new AuthLoginDto();
+  constructor(private authService: AuthService, private router: Router,) { }
+
 
   ngOnInit(): void {
   }
 
   login(){
-    
+
     this.authService.login(this.loginDto).subscribe(loginResult => {
-      this.token=loginResult.token;
-      
-      this.router.navigateByUrl('http://localhost:8080/auth/login');
-      alert('Login successful');
-    
+      localStorage.setItem('BEARER_TOKEN', loginResult.token)
+      console.log(localStorage.getItem('BEARER_TOKEN'));
+      this.router.navigate(['/postList']);
+
+
   });
 
   }

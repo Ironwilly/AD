@@ -90,7 +90,7 @@ public class PostController {
         return ResponseEntity.ok(postService.findAllPublicPosts());
     }
 
-    @GetMapping("/all")
+    @GetMapping("/post/all")
     public ResponseEntity<?> listadoCompleto(){
         return ResponseEntity.ok(postService.findAll());
     }
