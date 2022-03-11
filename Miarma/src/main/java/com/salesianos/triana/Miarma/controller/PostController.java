@@ -97,9 +97,7 @@ public class PostController {
 
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> removePost(@PathVariable Long id,@AuthenticationPrincipal User user)throws  IOException {
-
-
+    public ResponseEntity<?> removePostById(@PathVariable Long id,@AuthenticationPrincipal User user)throws  IOException {
 
             postService.removePostById(id, user);
             return ResponseEntity.noContent().build();

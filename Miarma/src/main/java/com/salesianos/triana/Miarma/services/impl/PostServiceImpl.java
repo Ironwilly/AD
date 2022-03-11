@@ -6,6 +6,7 @@ import com.salesianos.triana.Miarma.dto.GetPostDto;
 import com.salesianos.triana.Miarma.dto.PostDtoConverter;
 import com.salesianos.triana.Miarma.errors.exceptions.EntityNotFoundException;
 import com.salesianos.triana.Miarma.errors.exceptions.ListEntityNotFoundException;
+import com.salesianos.triana.Miarma.errors.exceptions.SingleEntityNotFoundException;
 import com.salesianos.triana.Miarma.models.Post;
 import com.salesianos.triana.Miarma.services.PostService;
 import com.salesianos.triana.Miarma.services.StorageService;
@@ -154,8 +155,20 @@ public class PostServiceImpl implements PostService {
        Optional<Post> post = postRepository.findById(id);
 
 
-            storageService.deleteFile(post.get().getImagen());
-            postRepository.delete(post.get());
+       if(post.isPresent()){
+           Post postEncontrado = post.get();
+
+           if(postEncontrado.getUser().getNick().equals(user.getNick())){
+               String nombreImagen = StringUtils.cleanPath(postEncontrado.getImagen());
+               String[] arrayNombre = nombreImagen.split("/");
+               storageService.deleteFile(arrayNombre[arrayNombre.length - 1]);
+               postRepository.deleteById(id);
+
+           }
+       }else{
+           throw new SingleEntityNotFoundException(id,Post.class);
+       }
+            ;
 
 
 
@@ -171,4 +184,4 @@ public class PostServiceImpl implements PostService {
     }
 
 
-//}
+
