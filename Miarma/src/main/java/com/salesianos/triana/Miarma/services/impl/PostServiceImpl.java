@@ -112,37 +112,27 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post edit(Long id, CreatePostDto createPostDto, MultipartFile file, CreateUserDto createUserDto){
 
-
-
+        Optional<Post> p = postRepository.findById(id);
         String filename = storageService.store(file);
-
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(filename)
                 .toUriString();
 
-         postRepository.save(Post.builder()
+        if(p.isPresent()){
+            Post postEncontrado = p.get();
+            postEncontrado.setId(p.get().getId());
+            postEncontrado.setTitulo(p.get().getTitulo());
+            postEncontrado.setDescripcion(p.get().getDescripcion());
+            postEncontrado.setImagen(uri);
+            postEncontrado.setIsPublic(p.get().getIsPublic());
 
+            return postRepository.save(postEncontrado);
 
-                .titulo(createPostDto.getTitulo())
-                .descripcion(createPostDto.getDescripcion())
-                .imagen(uri)
-                .isPublic(createPostDto.getIsPublic())
-                .build());
-
-        Optional<Post> p = postRepository.findById(id);
-        if(p.isEmpty()){
-            throw new EntityNotFoundException(id, Post.class);
+        }else {
+            throw new SingleEntityNotFoundException (id,Post.class);
         }
-        return p.map(nuevo ->{
-            nuevo.setTitulo(createPostDto.getTitulo());
-            nuevo.setImagen(createPostDto.getImagen());
-            nuevo.setDescripcion(createPostDto.getDescripcion());
-            return nuevo;
-
-        }).get();
-
 
 
     }

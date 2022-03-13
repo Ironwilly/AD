@@ -21,6 +21,7 @@ public interface PostService {
     List<GetPostDto> findAllPublicPosts();
     List<GetPostDto> findAll();
     Optional<Post> findOne(Long id);
+
     Post savePost(CreatePostDto createPostDto, MultipartFile file, User user);
     Post edit(Long id, CreatePostDto createPostDto, MultipartFile file, CreateUserDto createUserDto);
     void removePostById(Long id, User user) throws IOException;

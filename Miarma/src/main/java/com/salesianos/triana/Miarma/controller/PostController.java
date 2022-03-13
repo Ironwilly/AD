@@ -3,6 +3,8 @@ package com.salesianos.triana.Miarma.controller;
 
 import com.salesianos.triana.Miarma.Repositorios.PostRepository;
 import com.salesianos.triana.Miarma.dto.CreatePostDto;
+import com.salesianos.triana.Miarma.dto.GetPostDto;
+import com.salesianos.triana.Miarma.dto.PostDtoConverter;
 import com.salesianos.triana.Miarma.models.Post;
 import com.salesianos.triana.Miarma.services.impl.PostServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;
@@ -33,6 +35,7 @@ import java.nio.file.Files;
 public class PostController {
 
     private final PostServiceImpl postService;
+    private final PostDtoConverter postDtoConverter;
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final StorageService storageService;
@@ -78,8 +81,11 @@ public class PostController {
     }
 
     @PutMapping("/post/{id}")
-    public ResponseEntity<Post> edit(@PathVariable Long id, @RequestPart("post") CreatePostDto createPostDto, @RequestPart("file") MultipartFile file, CreateUserDto createUserDto) {
-        return ResponseEntity.ok().body(postService.edit(id, createPostDto,file,createUserDto));
+    public ResponseEntity<GetPostDto> edit(@PathVariable Long id, @RequestPart("post") CreatePostDto createPostDto, @RequestPart("file") MultipartFile file,@AuthenticationPrincipal CreateUserDto createUserDto) {
+
+        Post newPost = postService.edit(id,createPostDto,file,createUserDto);
+        GetPostDto newPostDto = postDtoConverter.getPostToPostDto(newPost);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newPostDto);
 
 
 
@@ -97,7 +103,7 @@ public class PostController {
 
 
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> removePostById(@PathVariable Long id,@AuthenticationPrincipal User user)throws  IOException {
+    public ResponseEntity<?> removePostById(@PathVariable Long id,@AuthenticationPrincipal User user) {
 
             postService.removePostById(id, user);
             return ResponseEntity.noContent().build();
