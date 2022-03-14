@@ -14,15 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface PostService {
 
     List<GetPostDto> findAllPublicPosts();
     List<GetPostDto> findAll();
-    Optional<Post> findOne(Long id);
-
-    Post savePost(CreatePostDto createPostDto, MultipartFile file, User user);
+    GetPostDto findOne(Long id,User user);
+    // List<GetPostDto> findPostByNick (String nick, User user);
+    CreatePostDto savePost(CreatePostDto createPostDto, MultipartFile file, User user);
     Post edit(Long id, CreatePostDto createPostDto, MultipartFile file, CreateUserDto createUserDto);
     void removePostById(Long id, User user) throws IOException;
 

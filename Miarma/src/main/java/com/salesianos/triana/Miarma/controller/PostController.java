@@ -5,6 +5,7 @@ import com.salesianos.triana.Miarma.Repositorios.PostRepository;
 import com.salesianos.triana.Miarma.dto.CreatePostDto;
 import com.salesianos.triana.Miarma.dto.GetPostDto;
 import com.salesianos.triana.Miarma.dto.PostDtoConverter;
+import com.salesianos.triana.Miarma.errors.exceptions.ListEntityNotFoundException;
 import com.salesianos.triana.Miarma.models.Post;
 import com.salesianos.triana.Miarma.services.impl.PostServiceImpl;
 import com.salesianos.triana.Miarma.services.StorageService;
@@ -28,6 +29,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.List;
 
 
 @RestController
@@ -53,28 +56,9 @@ public class PostController {
 
 
     @PostMapping("/post")
-    public ResponseEntity<Post> create(@RequestPart("post") CreatePostDto createPostDto, @RequestPart("file")MultipartFile file, @AuthenticationPrincipal User user) throws IOException {
-
-        String name = storageService.store(file);
-        String extension = StringUtils.getFilenameExtension(name);
-        BufferedImage originalImage = ImageIO.read(file.getInputStream());
-        BufferedImage escaledImage = storageService.simpleResizer(originalImage, 1024);
-        OutputStream outputStream = Files.newOutputStream(storageService.load(name));
-        ImageIO.write(escaledImage,extension,outputStream);
+    public ResponseEntity<?> create(@RequestPart("post") CreatePostDto createPostDto, @RequestPart("file")MultipartFile file, @AuthenticationPrincipal User user) throws IOException {
 
 
-
-        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(name)
-                .toUriString();
-
-        Post post10 = Post.builder()
-                .titulo(createPostDto.getTitulo())
-                .descripcion(createPostDto.getDescripcion())
-                .imagen(uri)
-                .user(user)
-                .build();
 
 
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.savePost(createPostDto,file,user));
@@ -105,9 +89,32 @@ public class PostController {
     @DeleteMapping("/post/{id}")
     public ResponseEntity<?> removePostById(@PathVariable Long id,@AuthenticationPrincipal User user) {
 
-            postService.removePostById(id, user);
+            postService.removePostById(id,user);
             return ResponseEntity.noContent().build();
         }
+
+    @GetMapping("post/{id}")
+    public ResponseEntity<GetPostDto> findOne (@PathVariable Long id,@AuthenticationPrincipal User user){
+
+        GetPostDto postDto = postService.findOne(id,user);
+        return ResponseEntity.ok().body(postDto);
+    }
+
+
+    /*
+    @GetMapping("post/{nick}")
+    public ResponseEntity<List<GetPostDto>> findPostByNick (@RequestParam(value = "nick")String string,@AuthenticationPrincipal User user){
+
+        List<GetPostDto> postDtoList = postService.findPostByNick(user.getNick(),user );
+        if (postDtoList == Collections.EMPTY_LIST){
+            throw new ListEntityNotFoundException(Post.class);
+        }else {
+            return ResponseEntity.ok().body(postDtoList);
+        }
+    }
+
+     */
+
     }
 
 

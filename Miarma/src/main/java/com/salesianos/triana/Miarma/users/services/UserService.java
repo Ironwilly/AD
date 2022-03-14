@@ -64,39 +64,48 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
 
     public User saveUser(CreateUserDto createUserDto, MultipartFile file) throws IOException {
 
-        String name = storageService.store(file);
+        if (createUserDto.getPassword().contentEquals(createUserDto.getPassword2())) {
+            String name = storageService.store(file);
 
 
-        String extension = StringUtils.getFilenameExtension(name);
-        BufferedImage originalImage = ImageIO.read(file.getInputStream());
-        BufferedImage escaledImage = storageService.simpleResizer(originalImage, 128);
-        OutputStream outputStream = Files.newOutputStream(storageService.load(name));
-        ImageIO.write(escaledImage,extension,outputStream);
+            String extension = StringUtils.getFilenameExtension(name);
+            BufferedImage originalImage = ImageIO.read(file.getInputStream());
+            BufferedImage escaledImage = storageService.simpleResizer(originalImage, 128);
+            OutputStream outputStream = Files.newOutputStream(storageService.load(name));
+            ImageIO.write(escaledImage, extension, outputStream);
 
-        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(name)
-                .toUriString();
+            String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path("/download/")
+                    .path(name)
+                    .toUriString();
 
-        return userRepository.save(User.builder()
-                .nombre(createUserDto.getNombre())
-                .apellidos(createUserDto.getApellidos())
-                .direccion(createUserDto.getDireccion())
-                .email(createUserDto.getEmail())
-                .telefono(createUserDto.getTelefono())
-                .avatar(uri)
-                .fechNaci(createUserDto.getFechNac())
-                .nick(createUserDto.getNick())
-                .isPublic(Boolean.valueOf(createUserDto.getIsPublic()))
-                .password(passwordEncoder.encode(createUserDto.getPassword()))
-                .rol(Roles.USER)
-                .build());
+            User user = User.builder()
+                    .nombre(createUserDto.getNombre())
+                    .apellidos(createUserDto.getApellidos())
+                    .direccion(createUserDto.getDireccion())
+                    .email(createUserDto.getEmail())
+                    .telefono(createUserDto.getTelefono())
+                    .avatar(uri)
+                    .fechNaci(createUserDto.getFechNac())
+                    .nick(createUserDto.getNick())
+                    .isPublic(Boolean.valueOf(createUserDto.getIsPublic()))
+                    .password(passwordEncoder.encode(createUserDto.getPassword()))
+                    .rol(Roles.USER)
+                    .build();
+
+            return save(user);
+
+        }else {
+            return null;
+        }
+
+   }
 
 
-    }
+    public CreateUserDto editUser (CreateUserDto createUserDto, User user,MultipartFile file){
 
-    public CreateUserDto editUser (CreateUserDto createUserDto, UUID id,MultipartFile file){
-
+        Optional<User> oldUser = repositorio.findById(user.getId());
+        storageService.deleteFile(oldUser.get().getAvatar());
         String filename = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -104,7 +113,7 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
                 .path(filename)
                 .toUriString();
 
-        return  userRepository.findById(id).map(u -> {
+        return  userRepository.findById(user.getId()).map(u -> {
             u.setNombre(createUserDto.getNombre());
             u.setApellidos(createUserDto.getApellidos());
             u.setNick(createUserDto.getNick());
@@ -114,8 +123,8 @@ public class UserService extends BaseService<User, UUID, UserRepository> impleme
             u.setIsPublic(Boolean.valueOf(createUserDto.getIsPublic()));
             u.setAvatar(uri);
             userRepository.save(u);
-            return userDtoConverter.editUser(u);
-        }).orElseThrow(() -> new SingleEntityNotFoundException(id,User.class));
+            return userDtoConverter.convertUserToCreateUserDto(u);
+        }).orElseThrow(() -> new SingleEntityNotFoundException(user.getId(),User.class));
 
     }
 

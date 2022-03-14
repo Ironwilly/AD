@@ -24,7 +24,7 @@ public class UserDtoConverter {
                 .build();
     }
 
-    public CreateUserDto editUser(User user){
+    public CreateUserDto convertUserToCreateUserDto(User user){
         return CreateUserDto.builder()
                 .nombre(user.getNombre())
                 .email(user.getEmail())

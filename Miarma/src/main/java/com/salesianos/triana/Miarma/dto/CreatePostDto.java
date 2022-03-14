@@ -15,6 +15,7 @@ import java.util.UUID;
 public class CreatePostDto {
 
 
+
     private String titulo;
 
     private String descripcion;

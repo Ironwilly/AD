@@ -168,12 +168,12 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/download/4.jpg"
+									"src": "/D:/2 DAM/AD/Miarma/download/powell.jpg"
 								},
 								{
 									"key": "post",
 									"type": "file",
-									"src": "/C:/Users/ferrari.fegui21/Documents/2DAM/AD/Miarma/publicacion2.json"
+									"src": "/D:/2 DAM/AD/Miarma/publicacion1.json"
 								}
 							]
 						},
@@ -194,7 +194,17 @@
 				{
 					"name": "Editar",
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "formdata",
@@ -212,7 +222,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:8080/post/2",
+							"raw": "http://localhost:8080/post/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -220,7 +230,7 @@
 							"port": "8080",
 							"path": [
 								"post",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -228,18 +238,6 @@
 				},
 				{
 					"name": "Obtener todas publicaciones publicas",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\",jsonData.token);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -294,7 +292,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzE4OTAwMS03ZjQ3LTE4NDktODE3Zi00N2Y4OTVkYTAwMDAiLCJpYXQiOjE2NDYyNjYzNTIsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.Y1PvlPli5eKhJy-ermYucfyw1PkpcHhjsDgdpScwVKmHagAfgSungZ77Xbteonzj",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -324,7 +322,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhYzFiMDJhZC03ZjU0LTFmMWYtODE3Zi01NDBmNzQ2MTAwMDAiLCJpYXQiOjE2NDY0NjkxODIsIm5vbWJyZSI6IldpbGx5IiwiYXBlbGxpZG9zIjoiZmVycmFyaSBmZXJyYXJpIiwicm9sZSI6IlVTRVIifQ.eY21onWFO1PN2-7KV2Nb26l55qni_c9yerCxzQIgsttm-soYs1T0MikBYsqs1jIL",
+									"value": "{{token}}",
 									"type": "string"
 								}
 							]
@@ -332,14 +330,45 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/all",
+							"raw": "http://localhost:8080/post/all",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"post",
 								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/post/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"post",
+								"1"
 							]
 						}
 					},

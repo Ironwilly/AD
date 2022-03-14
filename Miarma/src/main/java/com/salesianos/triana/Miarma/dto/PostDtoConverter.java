@@ -7,16 +7,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostDtoConverter {
 
-    public Post createPostDto(CreatePostDto c){
+    public CreatePostDto convertPostToCreatePostDto (Post p){
 
-        return new Post(
-                c.getTitulo(),
-                c.getDescripcion(),
-                c.getImagen(),
-                c.getIsPublic()
+        return CreatePostDto.builder()
+                .id(p.getUser().getId())
+                .titulo(p.getTitulo())
+                .descripcion(p.getDescripcion())
+                .imagen(p.getImagen())
+                .isPublic(p.getIsPublic())
+                .build();
 
 
-        );
+
+
+
 
 
     }
